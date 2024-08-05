@@ -20,12 +20,6 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Enable Corepack
-        run: corepack enable
-
-      - name: Prepare Yarn with Corepack
-        run: corepack prepare yarn@stable --activate
-
       - name: Install dependencies
         run: npm install
         working-directory: ./client
@@ -42,6 +36,6 @@ jobs:
           EB_ENV_NAME: 'crypto-bank-client-dev'
         run: |
           cd client
-          zip -r deploy.zip .
+          zip -r deploy.zip . -x "node_modules/*".
           cd ..
           npx eb deploy $EB_ENV_NAME --region $AWS_REGION --staged
