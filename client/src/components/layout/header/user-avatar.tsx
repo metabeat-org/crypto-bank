@@ -7,7 +7,7 @@ import { FC } from "react";
 import Image from "next/image";
 
 export const UserAvatar: FC = () => {
-    const { account, balance } = useAtomValue(walletAtom);
+    const wallet = useAtomValue(walletAtom);
 
     return (
         <div className="flex items-center gap-3">
@@ -20,12 +20,16 @@ export const UserAvatar: FC = () => {
                     />
                 </div>
             </div>
-            <div>
-                <div className="font-bold">{formatAddress(account)}</div>
-                <div className="text-sm opacity-50">
-                    {formatEthBalance(balance)} ETH
+            {wallet && (
+                <div>
+                    <div className="font-bold">
+                        {formatAddress(wallet.account)}
+                    </div>
+                    <div className="text-sm opacity-50">
+                        {formatEthBalance(wallet.balance)} ETH
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 };
