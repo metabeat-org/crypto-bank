@@ -23,12 +23,15 @@ jobs:
       - name: Enable Corepack
         run: corepack enable
 
+      - name: Prepare Yarn with Corepack
+        run: corepack prepare yarn@stable --activate
+
       - name: Install dependencies
-        run: corepack yarn install
+        run: yarn install
         working-directory: ./client
 
       - name: Build
-        run: corepack yarn build
+        run: yarn build
         working-directory: ./client
 
       - name: Deploy to Elastic Beanstalk
