@@ -1,8 +1,8 @@
 import React from "react";
 import { NextPage } from "next";
-import { Steps } from "@/components/pages/create/steps";
-import { ProgressByStep } from "@/components/pages/create/progress-by-step";
-import { StepActionButtons } from "@/components/pages/create/step-action-buttons";
+import { Steps } from "@/components/pages/deposit/steps";
+import { ProgressByStep } from "@/components/pages/deposit/progress-by-step";
+import { StepActionButtons } from "@/components/pages/deposit/step-action-buttons";
 
 const CreatePage: NextPage = () => {
     return (

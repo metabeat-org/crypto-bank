@@ -1,7 +1,7 @@
 "use client";
 
 import React, { FC } from "react";
-import { Signer } from "@/components/pages/create/signer";
+import { Signer } from "@/components/pages/deposit/signer";
 import { useAtom } from "jotai";
 import { createFormAtom } from "@/stores";
 

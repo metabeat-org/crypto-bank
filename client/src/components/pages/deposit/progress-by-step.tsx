@@ -1,9 +1,9 @@
 "use client";
 
 import React, { FC } from "react";
-import { AccountName } from "@/components/pages/create/account-name";
-import { Signers } from "@/components/pages/create/signers";
-import { Review } from "@/components/pages/create/review";
+import { AccountName } from "@/components/pages/deposit/account-name";
+import { Signers } from "@/components/pages/deposit/signers";
+import { Review } from "@/components/pages/deposit/review";
 import { useAtomValue } from "jotai/index";
 import { createStepAtom } from "@/stores";
 
