@@ -27,11 +27,11 @@ jobs:
         run: corepack prepare yarn@stable --activate
 
       - name: Install dependencies
-        run: yarn install
+        run: npm install
         working-directory: ./client
 
       - name: Build
-        run: yarn build
+        run: npm run build
         working-directory: ./client
 
       - name: Deploy to Elastic Beanstalk
