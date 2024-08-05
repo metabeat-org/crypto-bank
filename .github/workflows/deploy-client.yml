@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'client/**'
 
 jobs:
   deploy:
@@ -24,6 +26,7 @@ jobs:
 
       - name: Build
         run: yarn build
+        working-directory: ./client
 
       - name: Deploy to Elastic Beanstalk
         env:
