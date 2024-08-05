@@ -38,4 +38,6 @@ jobs:
           cd client
           zip -r deploy.zip . -x "node_modules/*".
           cd ..
+          npx eb init --region $AWS_REGION --platform "Node.js 18 running on 64bit Amazon Linux 2023" --interactive=false
+          npx eb use $EB_ENV_NAME
           npx eb deploy $EB_ENV_NAME --region $AWS_REGION --staged
