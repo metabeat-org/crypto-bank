@@ -1,7 +1,7 @@
 "use client";
 
-import { ConnectButton } from "@/components/layout/header/connect-button";
-import { UserAvatar } from "@/components/layout/header/user-avatar";
+import { ConnectButton } from "./connect-button";
+import { UserAvatar } from "./user-avatar";
 import { useAtomValue } from "jotai/index";
 import { loadingAtom, walletAtom } from "@/stores";
 import { Loading } from "@/components/layout/loading";

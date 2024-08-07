@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Menu } from "@/components/layout/left-menu/menu";
+import { Menu } from "./menu";
 export const LeftMenu: FC = () => {
     return (
         <ul
