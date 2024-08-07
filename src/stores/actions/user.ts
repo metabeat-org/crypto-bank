@@ -7,7 +7,7 @@ export const checkAuth = atom(null, async (get, set) => {
     // todo:    account 보내서 user info 받아오는 api
     const user = {
         userNo: 1,
-        caAddress: ["0x2a9C6EC1c5b2214C2E647b406159A1a69897b0fB"],
+        caAddress: ["0x9eA61945268dA95F39D8354a33F2D0b33e0cec54"],
     };
     set(userAtom, user);
 

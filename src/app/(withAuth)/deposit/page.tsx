@@ -1,10 +1,35 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { NextPage } from "next";
 import { DefaultInput } from "@/components/default-input";
+import { useAtom, useAtomValue } from "jotai/index";
+import { contractAtom, loadingAtom } from "@/stores";
+import { ethers } from "ethers";
 
 const DepositPage: NextPage = () => {
+    const [amount, setAmount] = useState("");
+    const contract = useAtomValue(contractAtom);
+    const [isLoading, setLoading] = useAtom(loadingAtom);
+
+    const handleDeposit = async () => {
+        if (!amount) {
+            return;
+        }
+
+        try {
+            const amountInWei = ethers.parseEther(amount);
+            const tx = await contract.deposit({ value: amountInWei });
+            console.log(tx.hash);
+            setLoading(true);
+            await tx.wait();
+            setLoading(false);
+            document.getElementById("my_modal_1").close();
+        } catch (e) {
+            console.error("Deposit failed", e);
+        }
+    };
+
     return (
         <div className="flex flex-col">
             <div className="flex items-center">
@@ -26,16 +51,27 @@ const DepositPage: NextPage = () => {
                         <DefaultInput
                             label="Amount"
                             inputProps={{
+                                value: amount,
+                                onChange: e => setAmount(e.target.value),
                                 placeholder: "in ETH",
                             }}
                         />
                         <div className="modal-action">
-                            <button className="btn btn-secondary">
+                            <button
+                                className="btn btn-secondary"
+                                onClick={handleDeposit}
+                                disabled={isLoading}
+                            >
                                 Deposit
                             </button>
                             <form method="dialog">
                                 {/* if there is a button in form, it will close the modal */}
-                                <button className="btn">Close</button>
+                                <button
+                                    className="btn"
+                                    disabled={isLoading}
+                                >
+                                    Close
+                                </button>
                             </form>
                         </div>
                     </div>
