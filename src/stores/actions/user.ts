@@ -23,13 +23,9 @@ export const checkAuth = atom(null, async (get, set) => {
             return;
         }
 
-        // const userInfo = {
-        //     userNo: 1,
-        //     caAddress: ["0x9eA61945268dA95F39D8354a33F2D0b33e0cec54"],
-        // };
         const { userInfo } = data;
         set(userAtom, userInfo);
-        await set(setCAContract, userInfo.caAddress);
+        await set(setCAContract, userInfo.caAddresses[0]);
     } catch (e) {
         set(userAtom, null);
         console.error(":: Failed Get UserInfo ::", e);
