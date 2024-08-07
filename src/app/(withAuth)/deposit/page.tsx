@@ -4,12 +4,13 @@ import React, { useState } from "react";
 import { NextPage } from "next";
 import { DefaultInput } from "@/components/default-input";
 import { useAtom, useAtomValue } from "jotai/index";
-import { contractAtom, loadingAtom } from "@/stores";
+import { contractAtom, loadingAtom, userAtom } from "@/stores";
 import { ethers } from "ethers";
 
 const DepositPage: NextPage = () => {
     const [amount, setAmount] = useState("");
     const contract = useAtomValue(contractAtom);
+    const { userNo, caAddresses, eoaAddress } = useAtomValue(userAtom);
     const [isLoading, setLoading] = useAtom(loadingAtom);
 
     const handleDeposit = async () => {
@@ -20,10 +21,33 @@ const DepositPage: NextPage = () => {
         try {
             const amountInWei = ethers.parseEther(amount);
             const tx = await contract.deposit({ value: amountInWei });
-            console.log(tx.hash);
+
             setLoading(true);
             await tx.wait();
+            const caAddress = caAddresses[0];
+            const res = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/transfer/${userNo}/deposit`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        userNo,
+                        type: "D",
+                        caAddress,
+                        txHash: tx.hash,
+                        txStatus: "success",
+                        from: eoaAddress,
+                        to: caAddress,
+                        amount,
+                        gas: "0",
+                        gasPayer: eoaAddress,
+                    }),
+                }
+            );
             setLoading(false);
+
             document.getElementById("my_modal_1").close();
         } catch (e) {
             console.error("Deposit failed", e);
