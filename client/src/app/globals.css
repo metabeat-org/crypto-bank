@@ -10,6 +10,11 @@
     --left-menu-width: 14rem;
 }
 
+:root:has(:is(.modal-open, .modal:target, .modal-toggle:checked + .modal, .modal[open])) {
+    overflow: hidden;
+     scrollbar-gutter: unset;
+}
+
 @media (prefers-color-scheme: dark) {
     :root {
         --foreground-rgb: 255, 255, 255;

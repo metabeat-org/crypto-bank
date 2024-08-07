@@ -1,17 +1,20 @@
+"use client";
+
 import React from "react";
 import { NextPage } from "next";
 
 const DepositPage: NextPage = () => {
     return (
         <div className="flex flex-col">
-            <div>
+            <div className="flex items-center">
+                <h2 className="text-3xl font-bold">Deposit History</h2>
                 <button
-                    className="btn"
-                    // onClick={() =>
-                    //     document.getElementById("my_modal_1").showModal()
-                    // }
+                    className="btn btn-primary ml-auto"
+                    onClick={() =>
+                        document.getElementById("my_modal_1").showModal()
+                    }
                 >
-                    open modal
+                    Deposit
                 </button>
                 <dialog
                     id="my_modal_1"
@@ -31,7 +34,7 @@ const DepositPage: NextPage = () => {
                     </div>
                 </dialog>
             </div>
-            <div className="overflow-x-auto">
+            <div className="mt-10 overflow-x-auto">
                 <table className="table">
                     {/* head */}
                     <thead>
