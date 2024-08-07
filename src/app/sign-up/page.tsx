@@ -5,11 +5,12 @@ import { NextPage } from "next";
 import { DefaultInput } from "@/components/default-input";
 import { useAtom, useAtomValue } from "jotai/index";
 import { loadingAtom, walletAtom } from "@/stores";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const SignUpPage: NextPage = () => {
     const [isLoading, setLoading] = useAtom(loadingAtom);
     const { account } = useAtomValue(walletAtom);
+    const router = useRouter();
     const [form, setForm] = useState<{ email: string; userName: string }>({
         email: "",
         userName: "",
@@ -32,9 +33,8 @@ const SignUpPage: NextPage = () => {
             setLoading(false);
 
             const { status } = await res.json();
-
-            if (status === 200) {
-                redirect("/home");
+            if (status === 201) {
+                router.push("/home");
             }
         } catch (e) {
             setLoading(false);

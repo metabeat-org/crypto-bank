@@ -18,7 +18,7 @@ export const checkAuth = atom(null, async (get, set) => {
         );
         const { status, data } = await res.json();
 
-        if (status !== 200) {
+        if (status !== 201) {
             set(userAtom, null);
             return;
         }
