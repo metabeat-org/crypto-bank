@@ -1,17 +1,43 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
 import { DefaultInput } from "@/components/default-input";
 import { useAtom, useAtomValue } from "jotai/index";
 import { contractAtom, loadingAtom, userAtom } from "@/stores";
 import { ethers } from "ethers";
+import { formatAddress, formatEthBalance, formatRelativeTime } from "@/utils";
 
 const DepositPage: NextPage = () => {
+    const [history, setHistory] = useState<
+        Array<{
+            transactionHistNo: number;
+            type: "D" | "W";
+            txHash: string;
+            txStatus: string;
+            from: string;
+            to: string;
+            amount: string;
+            regDate: string;
+        }>
+    >([]);
     const [amount, setAmount] = useState("");
     const contract = useAtomValue(contractAtom);
     const { userNo, caAddresses, eoaAddress } = useAtomValue(userAtom);
     const [isLoading, setLoading] = useAtom(loadingAtom);
+
+    const getDepositHistory = async () => {
+        const res = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/transfer/${caAddresses[0]}/hists/deposit`
+        );
+        const { data } = await res.json();
+        const { transferHists } = data;
+        setHistory(transferHists);
+    };
+
+    useEffect(() => {
+        getDepositHistory();
+    }, []);
 
     const handleDeposit = async () => {
         if (!amount) {
@@ -114,48 +140,38 @@ const DepositPage: NextPage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* row 1 */}
-                        <tr className="hover">
-                            <td>
-                                <a>0x503afb676be44...</a>
-                            </td>
-                            <td>125 days ago</td>
-                            <td>
-                                <a>0xc2BD30B9...333Fa0033</a>
-                            </td>
-                            <td>
-                                <a>0x6bFd17f7...7Ded71575</a>
-                            </td>
-                            <td>0.3006221 ETH</td>
-                        </tr>
-                        {/* row 2 */}
-                        <tr className="hover">
-                            <td>
-                                <a>0x503afb676be44...</a>
-                            </td>
-                            <td>125 days ago</td>
-                            <td>
-                                <a>0xc2BD30B9...333Fa0033</a>
-                            </td>
-                            <td>
-                                <a>0x6bFd17f7...7Ded71575</a>
-                            </td>
-                            <td>0.0021 ETH</td>
-                        </tr>
-                        {/* row 3 */}
-                        <tr className="hover">
-                            <td>
-                                <a>0x503afb676be44...</a>
-                            </td>
-                            <td>125 days ago</td>
-                            <td>
-                                <a>0xc2BD30B9...333Fa0033</a>
-                            </td>
-                            <td>
-                                <a>0x6bFd17f7...7Ded71575</a>
-                            </td>
-                            <td>0.61 ETH</td>
-                        </tr>
+                        {history.length > 0 ? (
+                            history.map(
+                                ({ txHash, regDate, from, to, amount }) => (
+                                    <tr className="hover">
+                                        <td>
+                                            <a>{formatAddress(txHash)}</a>
+                                        </td>
+                                        <td>
+                                            {formatRelativeTime(
+                                                new Date(regDate).getTime()
+                                            )}
+                                        </td>
+                                        <td>
+                                            <a>{formatAddress(from)}</a>
+                                        </td>
+                                        <td>
+                                            <a>{formatAddress(to)}</a>
+                                        </td>
+                                        <td>{formatEthBalance(amount)} ETH</td>
+                                    </tr>
+                                )
+                            )
+                        ) : (
+                            <tr>
+                                <td
+                                    colSpan={5}
+                                    className="text-center text-warning"
+                                >
+                                    No history yet
+                                </td>
+                            </tr>
+                        )}
                     </tbody>
                 </table>
             </div>
