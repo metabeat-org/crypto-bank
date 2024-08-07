@@ -2,6 +2,7 @@
 
 import React from "react";
 import { NextPage } from "next";
+import { withAuth } from "@/guards/auth-guard";
 
 const WithdrawalPage: NextPage = () => {
     return (
@@ -38,4 +39,4 @@ const WithdrawalPage: NextPage = () => {
     );
 };
 
-export default WithdrawalPage;
+export default withAuth(WithdrawalPage);

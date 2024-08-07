@@ -3,6 +3,7 @@
 import React from "react";
 import { NextPage } from "next";
 import { DefaultInput } from "@/components/default-input";
+import { withAuth } from "@/guards/auth-guard";
 
 const DepositPage: NextPage = () => {
     return (
@@ -103,4 +104,4 @@ const DepositPage: NextPage = () => {
     );
 };
 
-export default DepositPage;
+export default withAuth(DepositPage);
