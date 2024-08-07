@@ -12,7 +12,7 @@ export const setCAContract = atom(null, async (get, set, ...args) => {
         const signer = get(signerAtom);
         const contract = new ethers.Contract(caAddress, abi, signer);
         set(contractAtom, contract);
-    } catch (error) {
-        console.error(":: Failed Connect Contract ::", error);
+    } catch (e) {
+        console.error(":: Failed Connect Contract ::", e);
     }
 });

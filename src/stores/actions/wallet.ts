@@ -47,7 +47,7 @@ const initializeProvider = async (set: any) => {
 export const setWallet = atom(null, async (get, set) => {
     try {
         await initializeProvider(set);
-    } catch (error) {
-        console.error(":: Failed Connect Wallet ::", error);
+    } catch (e) {
+        console.error(":: Failed Connect Wallet ::", e);
     }
 });
