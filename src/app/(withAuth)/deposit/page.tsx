@@ -25,7 +25,7 @@ const DepositPage: NextPage = () => {
             setLoading(true);
             await tx.wait();
             const caAddress = caAddresses[0];
-            const res = await fetch(
+            await fetch(
                 `${process.env.NEXT_PUBLIC_API_URL}/transfer/${userNo}/deposit`,
                 {
                     method: "POST",
