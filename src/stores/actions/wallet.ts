@@ -44,7 +44,7 @@ const initializeProvider = async (set: any) => {
     }
 };
 
-export const setProvider = atom(null, async (get, set) => {
+export const setWallet = atom(null, async (get, set) => {
     try {
         await initializeProvider(set);
     } catch (error) {

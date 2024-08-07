@@ -1,11 +1,11 @@
 "use client";
 
 import { useSetAtom } from "jotai";
-import { setProvider } from "@/stores";
-import { FC, useEffect } from "react";
+import { setWallet } from "@/stores";
+import { FC } from "react";
 
 export const ConnectButton: FC = () => {
-    const connectWallet = useSetAtom(setProvider);
+    const connectWallet = useSetAtom(setWallet);
 
     const handleConnect = async () => {
         await connectWallet();

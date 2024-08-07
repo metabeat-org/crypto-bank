@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { NextPage } from "next";
 import { DefaultInput } from "@/components/default-input";

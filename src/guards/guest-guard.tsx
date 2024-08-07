@@ -3,7 +3,7 @@ import { useAtomValue, useSetAtom } from "jotai/index";
 import { checkAuth, userAtom } from "@/stores";
 import { redirect, usePathname } from "next/navigation";
 
-export const withAuth = Component => props => {
+export const withGuest = Component => props => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const executeCheckAuth = useSetAtom(checkAuth);
     const user = useAtomValue(userAtom);
@@ -17,14 +17,14 @@ export const withAuth = Component => props => {
         if (typeof user === "undefined") {
             setIsAuthenticated(false);
         } else if (user === null) {
-            redirect("/sign-up");
-        } else {
             setIsAuthenticated(true);
+        } else {
+            redirect("/home");
         }
     }, [user]);
 
-    if (!isAuthenticated) {
-        return null;
+    if (isAuthenticated) {
+        return <Component {...props} />;
     }
-    return <Component {...props} />;
+    return null;
 };

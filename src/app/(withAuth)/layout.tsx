@@ -1,8 +1,11 @@
+"use client";
+
 import React from "react";
 import { Header } from "@/components/layout/header";
 import { LeftMenu } from "@/components/layout/left-menu";
+import { withAuth } from "@/guards/auth-guard";
 
-export default function MainLayout({
+function MainLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
@@ -15,3 +18,5 @@ export default function MainLayout({
         </div>
     );
 }
+
+export default withAuth(MainLayout);

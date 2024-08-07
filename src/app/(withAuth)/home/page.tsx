@@ -2,7 +2,6 @@
 
 import React from "react";
 import { NextPage } from "next";
-import { withAuth } from "@/guards/auth-guard";
 
 const HomePage: NextPage = () => {
     return (
@@ -39,4 +38,4 @@ const HomePage: NextPage = () => {
     );
 };
 
-export default withAuth(HomePage);
+export default HomePage;
