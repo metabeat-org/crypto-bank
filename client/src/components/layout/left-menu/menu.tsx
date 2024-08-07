@@ -1,15 +1,24 @@
-import { FC } from "react";
+"use client";
 
-export const LeftMenu: FC = () => {
+import { FC } from "react";
+import Link, { LinkProps } from "next/link";
+import { usePathname } from "next/navigation";
+
+interface MenuProps extends LinkProps {}
+export const Menu: FC<MenuProps> = ({ href }) => {
+    const pathname = usePathname();
+
+    const formatLabel = (href: string) => {
+        const label = href.replace("/", "");
+        return label.charAt(0).toUpperCase() + label.slice(1);
+    };
+
     return (
-        <ul
-            className="fixed menu bg-base-200 rounded-box w-56 h-full"
-            style={{
-                marginTop: "var(--header-height)",
-            }}
-        >
-            <li>
-                <a>Deposit</a>
+        <>
+            <li
+                className={`rounded-md ${pathname === href && "bg-accent font-semibold"}`}
+            >
+                <Link href={href}>{formatLabel(href.toString())}</Link>
             </li>
             {/*<li>*/}
             {/*    <details open>*/}
@@ -37,9 +46,6 @@ export const LeftMenu: FC = () => {
             {/*        </ul>*/}
             {/*    </details>*/}
             {/*</li>*/}
-            <li>
-                <a>Withdrawal</a>
-            </li>
-        </ul>
+        </>
     );
 };
