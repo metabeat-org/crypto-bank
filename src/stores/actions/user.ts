@@ -25,7 +25,7 @@ export const checkAuth = atom(null, async (get, set) => {
 
         const { userInfo } = data;
         set(userAtom, userInfo);
-        await set(setCAContract, userInfo.caAddresses[0]);
+        await set(setCAContract, userInfo.caAddresses);
     } catch (e) {
         set(userAtom, null);
         console.error(":: Failed Get UserInfo ::", e);
