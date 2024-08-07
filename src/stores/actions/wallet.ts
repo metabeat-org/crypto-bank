@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 import { ethers } from "ethers";
-import { loadingAtom, providerAtom, signerAtom, walletAtom } from "@/stores";
+import { loadingAtom, signerAtom, walletAtom } from "@/stores";
 
 const handleAccountsChanged = async (
     accounts: string[],
@@ -28,7 +28,7 @@ const initializeProvider = async (set: any) => {
         const account = signer.address;
         const balance = await provider.getBalance(account);
 
-        set(providerAtom, provider);
+        // set(providerAtom, provider);
         set(signerAtom, signer);
         set(walletAtom, { account, balance: ethers.formatEther(balance) });
 

@@ -6,6 +6,6 @@ interface Wallet {
     balance: string;
 }
 
-export const providerAtom = atom<ethers.BrowserProvider | null>(null);
+// export const providerAtom = atom<ethers.BrowserProvider | null>(null);
 export const signerAtom = atom<ethers.Signer | null>(null);
 export const walletAtom = atom<Wallet | null>(null);
