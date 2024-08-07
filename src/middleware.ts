@@ -17,7 +17,7 @@ export async function middleware(request: NextRequest) {
         }
     } else {
         if (exists) {
-            return NextResponse.redirect(new URL("/deposit", request.url));
+            return NextResponse.redirect(new URL("/home", request.url));
         }
     }
 }

@@ -18,7 +18,7 @@ export const Header: FC = () => {
                 <div className="navbar-start">
                     <Link
                         className="btn btn-ghost text-xl"
-                        href="/deposit"
+                        href="/home"
                     >
                         Crypto Bank
                     </Link>
