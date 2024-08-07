@@ -6,24 +6,29 @@ interface DefaultInputProps {
         React.InputHTMLAttributes<HTMLInputElement>,
         HTMLInputElement
     >;
+    errorMessage?: string;
 }
 export const DefaultInput: FC<DefaultInputProps> = ({
     label = "",
     inputProps,
+    errorMessage = "",
 }) => {
     return (
-        <label className="form-control w-full max-w-xs">
+        <label className="form-control w-full">
             <div className="label">
                 <span className="label-text">{label}</span>
             </div>
             <input
                 type="text"
                 placeholder="Type here"
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full"
                 {...(!!inputProps && {
                     ...inputProps,
                 })}
             />
+            <span className="py-1.5 break-words text-error">
+                {errorMessage}
+            </span>
         </label>
     );
 };
