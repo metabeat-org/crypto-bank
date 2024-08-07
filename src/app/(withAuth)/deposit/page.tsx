@@ -75,6 +75,8 @@ const DepositPage: NextPage = () => {
             setLoading(false);
 
             document.getElementById("my_modal_1").close();
+
+            await getDepositHistory();
         } catch (e) {
             console.error("Deposit failed", e);
         }
@@ -143,7 +145,10 @@ const DepositPage: NextPage = () => {
                         {history.length > 0 ? (
                             history.map(
                                 ({ txHash, regDate, from, to, amount }) => (
-                                    <tr className="hover">
+                                    <tr
+                                        className="hover"
+                                        key={txHash}
+                                    >
                                         <td>
                                             <a>{formatAddress(txHash)}</a>
                                         </td>
