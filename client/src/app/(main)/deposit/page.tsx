@@ -2,6 +2,7 @@
 
 import React from "react";
 import { NextPage } from "next";
+import { DefaultInput } from "@/components/default-input";
 
 const DepositPage: NextPage = () => {
     return (
@@ -21,11 +22,17 @@ const DepositPage: NextPage = () => {
                     className="modal"
                 >
                     <div className="modal-box">
-                        <h3 className="font-bold text-lg">Hello!</h3>
-                        <p className="py-4">
-                            Press ESC key or click the button below to close
-                        </p>
+                        <h3 className="font-bold text-lg">Deposit</h3>
+                        <DefaultInput
+                            label="Amount"
+                            inputProps={{
+                                placeholder: "in ETH",
+                            }}
+                        />
                         <div className="modal-action">
+                            <button className="btn btn-secondary">
+                                Deposit
+                            </button>
                             <form method="dialog">
                                 {/* if there is a button in form, it will close the modal */}
                                 <button className="btn">Close</button>
@@ -39,33 +46,55 @@ const DepositPage: NextPage = () => {
                     {/* head */}
                     <thead>
                         <tr>
-                            <th></th>
-                            <th>Name</th>
-                            <th>Job</th>
-                            <th>Favorite Color</th>
+                            <th>Transaction Hash</th>
+                            <th>Age</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Amount</th>
                         </tr>
                     </thead>
                     <tbody>
                         {/* row 1 */}
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>Quality Control Specialist</td>
-                            <td>Blue</td>
+                        <tr className="hover">
+                            <td>
+                                <a>0x503afb676be44...</a>
+                            </td>
+                            <td>125 days ago</td>
+                            <td>
+                                <a>0xc2BD30B9...333Fa0033</a>
+                            </td>
+                            <td>
+                                <a>0x6bFd17f7...7Ded71575</a>
+                            </td>
+                            <td>0.3006221 ETH</td>
                         </tr>
                         {/* row 2 */}
                         <tr className="hover">
-                            <th>2</th>
-                            <td>Hart Hagerty</td>
-                            <td>Desktop Support Technician</td>
-                            <td>Purple</td>
+                            <td>
+                                <a>0x503afb676be44...</a>
+                            </td>
+                            <td>125 days ago</td>
+                            <td>
+                                <a>0xc2BD30B9...333Fa0033</a>
+                            </td>
+                            <td>
+                                <a>0x6bFd17f7...7Ded71575</a>
+                            </td>
+                            <td>0.0021 ETH</td>
                         </tr>
                         {/* row 3 */}
-                        <tr>
-                            <th>3</th>
-                            <td>Brice Swyre</td>
-                            <td>Tax Accountant</td>
-                            <td>Red</td>
+                        <tr className="hover">
+                            <td>
+                                <a>0x503afb676be44...</a>
+                            </td>
+                            <td>125 days ago</td>
+                            <td>
+                                <a>0xc2BD30B9...333Fa0033</a>
+                            </td>
+                            <td>
+                                <a>0x6bFd17f7...7Ded71575</a>
+                            </td>
+                            <td>0.61 ETH</td>
                         </tr>
                     </tbody>
                 </table>
