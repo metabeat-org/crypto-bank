@@ -150,7 +150,13 @@ const DepositPage: NextPage = () => {
                                         key={txHash}
                                     >
                                         <td>
-                                            <a>{formatAddress(txHash)}</a>
+                                            <a
+                                                className="underline"
+                                                href={`https://sepolia.etherscan.io/tx/${txHash}`}
+                                                target="_blank"
+                                            >
+                                                {formatAddress(txHash)}
+                                            </a>
                                         </td>
                                         <td>
                                             {formatRelativeTime(
@@ -158,10 +164,22 @@ const DepositPage: NextPage = () => {
                                             )}
                                         </td>
                                         <td>
-                                            <a>{formatAddress(from)}</a>
+                                            <a
+                                                className="underline"
+                                                href={`https://sepolia.etherscan.io/address/${from}`}
+                                                target="_blank"
+                                            >
+                                                {formatAddress(from)}
+                                            </a>
                                         </td>
                                         <td>
-                                            <a>{formatAddress(to)}</a>
+                                            <a
+                                                className="underline"
+                                                href={`https://sepolia.etherscan.io/address/${to}`}
+                                                target="_blank"
+                                            >
+                                                {formatAddress(to)}
+                                            </a>
                                         </td>
                                         <td>{formatEthBalance(amount)} ETH</td>
                                     </tr>
