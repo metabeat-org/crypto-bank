@@ -135,6 +135,7 @@ const DepositPage: NextPage = () => {
                     <thead>
                         <tr>
                             <th>Transaction Hash</th>
+                            <th>Status</th>
                             <th>Age</th>
                             <th>From</th>
                             <th>To</th>
@@ -144,7 +145,14 @@ const DepositPage: NextPage = () => {
                     <tbody>
                         {history.length > 0 ? (
                             history.map(
-                                ({ txHash, regDate, from, to, amount }) => (
+                                ({
+                                    txHash,
+                                    txStatus,
+                                    regDate,
+                                    from,
+                                    to,
+                                    amount,
+                                }) => (
                                     <tr
                                         className="hover"
                                         key={txHash}
@@ -157,6 +165,15 @@ const DepositPage: NextPage = () => {
                                             >
                                                 {formatAddress(txHash)}
                                             </a>
+                                        </td>
+                                        <td>
+                                            <div
+                                                className={`badge ${txStatus === "S" ? "badge-secondary" : "badge-error"}`}
+                                            >
+                                                {txStatus === "S"
+                                                    ? "Success"
+                                                    : "Fail"}
+                                            </div>
                                         </td>
                                         <td>
                                             {formatRelativeTime(
