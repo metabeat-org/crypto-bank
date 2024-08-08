@@ -53,7 +53,7 @@ const SignUpPage: NextPage = () => {
                         <DefaultInput
                             label="Wallet Address"
                             inputProps={{
-                                defaultValue: account,
+                                value: account,
                                 readOnly: true,
                             }}
                         />
