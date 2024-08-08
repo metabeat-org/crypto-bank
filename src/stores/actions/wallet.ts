@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 import { ethers } from "ethers";
-import { loadingAtom, signerAtom, walletAtom } from "@/stores";
+import { checkAuth, loadingAtom, signerAtom, walletAtom } from "@/stores";
 
 const handleAccountsChanged = async (
     accounts: string[],
@@ -33,9 +33,10 @@ const initializeProvider = async (set: any) => {
         set(walletAtom, { account, balance: ethers.formatEther(balance) });
 
         set(loadingAtom, false);
-        window.ethereum.on("accountsChanged", (accounts: string[]) =>
-            handleAccountsChanged(accounts, set, provider)
-        );
+        window.ethereum.on("accountsChanged", async (accounts: string[]) => {
+            await handleAccountsChanged(accounts, set, provider);
+            await set(checkAuth);
+        });
         window.ethereum.on("chainChanged", handleChainChanged);
 
         return provider;
