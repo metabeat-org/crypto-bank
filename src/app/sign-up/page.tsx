@@ -6,6 +6,7 @@ import { DefaultInput } from "@/components/default-input";
 import { useAtom, useAtomValue } from "jotai/index";
 import { loadingAtom, walletAtom } from "@/stores";
 import { useRouter } from "next/navigation";
+import { Loading } from "@/components/layout/loading";
 
 const SignUpPage: NextPage = () => {
     const [isLoading, setLoading] = useAtom(loadingAtom);
@@ -88,6 +89,7 @@ const SignUpPage: NextPage = () => {
                     </button>
                 </form>
             </div>
+            {isLoading && <Loading />}
         </div>
     );
 };
